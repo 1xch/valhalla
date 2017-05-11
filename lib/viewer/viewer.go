@@ -1,6 +1,7 @@
 package viewer
 
 import (
+	"fmt"
 	"image"
 	"os"
 	"runtime"
@@ -71,7 +72,10 @@ func initialize(v *Viewer) error {
 
 		w, h := bound(v.image)
 
-		window, err := glfw.CreateWindow(w, h, "valhalla", nil, nil)
+		ip := v.image.Path()
+		wt := fmt.Sprintf("valhalla -- %s", ip)
+
+		window, err := glfw.CreateWindow(w, h, wt, nil, nil)
 		if err != nil {
 			return err
 		}

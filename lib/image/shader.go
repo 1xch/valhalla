@@ -94,10 +94,6 @@ func baseVertexShader() *Shader {
 	return NewShader(gl.VERTEX_SHADER, BVS)
 }
 
-func baseFragmentShader() *Shader {
-	return NewShader(gl.FRAGMENT_SHADER, BFS)
-}
-
 const BVS = `
 #version 330 core
 
@@ -108,8 +104,6 @@ layout (location = 2) in vec2 texCoord;
 out vec4 VertexColor;
 out vec2 TexCoord;
 
-void userVertexFunc();
-
 void main()
 {
 	gl_Position = vec4(position, 1.0);
@@ -117,6 +111,10 @@ void main()
 	TexCoord = vec2(texCoord.x, 1.0f - texCoord.y);
 }
 ` + "\x00"
+
+func baseFragmentShader() *Shader {
+	return NewShader(gl.FRAGMENT_SHADER, BFS)
+}
 
 const BFS = `
 #version 330 core
@@ -127,8 +125,6 @@ in vec2 TexCoord;
 out vec4 color;
 
 uniform sampler2D imageTexture;
-
-void userFragmentFunc();
 
 void main()
 {

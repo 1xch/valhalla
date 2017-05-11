@@ -37,13 +37,6 @@ func initialize(i *Image) {
 	i.initialized = true
 }
 
-func extra(v []string) bool {
-	if len(v) > 0 {
-		return true
-	}
-	return false
-}
-
 func imageShader(i *Image) *Shader {
 	c := make([]*Shader, 0)
 	c = append(c, baseVertexShader())
@@ -72,4 +65,8 @@ func (i *Image) Free() {
 		i.shader.Free()
 		i.mesh.Free()
 	}
+}
+
+func (i *Image) Path() string {
+	return i.path
 }
